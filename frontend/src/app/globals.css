@@ -1,0 +1,124 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-heading: var(--font-display);
+  --font-mono: var(--font-mono);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  /* Brand surfaces + amber accent ramp */
+  --color-graphite: var(--graphite);
+  --color-graphite-elevated: var(--graphite-elevated);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+/*
+ * arcflow design system — a deep graphite tool, not another blue SaaS.
+ * Base: graphite #111218 · Accent: amber-gold #f0a500 · Text: warm off-white.
+ * The page is dark by default; this is the brand, not a mode toggle.
+ */
+:root {
+  --radius: 0.75rem;
+
+  --graphite: #111218;
+  --graphite-elevated: #181922;
+  --amber: #f0a500;
+  --amber-soft: #f7c34d;
+
+  --background: #111218;
+  --foreground: #ece7da;
+
+  --card: #16171f;
+  --card-foreground: #ece7da;
+  --popover: #181922;
+  --popover-foreground: #ece7da;
+
+  --primary: #f0a500;
+  --primary-foreground: #16140c;
+
+  --secondary: #1c1d27;
+  --secondary-foreground: #ece7da;
+
+  --muted: #1a1b23;
+  --muted-foreground: #93909e;
+
+  --accent: #20212c;
+  --accent-foreground: #f7c34d;
+
+  --destructive: oklch(0.62 0.21 25);
+
+  --border: rgba(236, 231, 218, 0.09);
+  --input: rgba(236, 231, 218, 0.12);
+  --ring: #f0a500;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans antialiased;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv01";
+  }
+
+  /* Display face: tight, architectural headings. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+    font-weight: 600;
+  }
+
+  ::selection {
+    background-color: var(--amber);
+    color: var(--primary-foreground);
+  }
+}
+
+@layer components {
+  /* Page gutter shared by the navbar and every section. */
+  .container-arc {
+    @apply mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10;
+  }
+}
