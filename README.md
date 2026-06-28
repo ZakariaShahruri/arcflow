@@ -96,7 +96,35 @@ not a mode toggle):
   `frontend/src/fonts/`: **Clash Display** (`font-display`, headings) and
   **Satoshi** (`font-sans`, body).
 - **Motion** — `arc-comet`, `arc-float`, and `arc-glow-pulse` keyframes power
-  the live visuals and respect `prefers-reduced-motion`.
+  the live visuals; sections fade-and-rise into view via the `Reveal` component
+  (`src/components/reveal.tsx`, IntersectionObserver-based); buttons and cards
+  have subtle hover/press micro-interactions. All motion respects
+  `prefers-reduced-motion`.
+
+## SEO & metadata
+
+- Rich metadata (title template, keywords, canonical, Open Graph, Twitter card,
+  robots) lives in `src/app/layout.tsx`, driven by `src/lib/site.ts`.
+- Dynamic OG/Twitter image generated with `next/og` at `src/app/opengraph-image.tsx`.
+- `src/app/sitemap.ts` and `src/app/robots.ts` produce `/sitemap.xml` and
+  `/robots.txt`.
+- The canonical site URL resolves from `NEXT_PUBLIC_SITE_URL`, then the Vercel
+  production domain, then a default — so OG/canonical/sitemap are correct in prod
+  with no manual config.
+
+## Deployment (Vercel)
+
+The frontend is deployed on Vercel, connected to this GitHub repo:
+
+- **Root Directory** is set to `frontend` (monorepo); framework auto-detected as
+  Next.js. Pushes to `main` ship to production; pull requests get preview deploys.
+- **Environment variables** (Project → Settings → Environment Variables):
+  `DATABASE_URL` (Production) for the waitlist. The build itself doesn't need it
+  (the DB client is lazy), but the live form does. Point it at the same Neon
+  database you migrated, or run `npm run db:migrate` against the prod database.
+- **Deployment Protection** is set so only preview deployments require auth; the
+  production marketing site is public.
+- The Spring Boot `backend/` is independent and not deployed by this Vercel project.
 
 ## Layout
 
