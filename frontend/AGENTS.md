@@ -13,6 +13,16 @@ Stack: Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · shadcn/ui (ra
   - Body/UI: **Satoshi** → `font-sans` (`--font-sans`), the default.
 - **Layout**: page gutter is the `.container-arc` utility. Root layout wires `SiteHeader` + `SiteFooter`.
 
+## Data (Neon Postgres + Drizzle)
+- Drizzle schema in `src/db/schema.ts`; lazy client `getDb()` in `src/db/index.ts`
+  (uses `drizzle-orm/neon-http` + `@neondatabase/serverless`, reads `DATABASE_URL`).
+- Config in `drizzle.config.ts`; migrations in `drizzle/`. Scripts: `db:generate`,
+  `db:migrate`, `db:push`, `db:studio`. `DATABASE_URL` lives in `.env.local`.
+- Waitlist signup: server action `joinWaitlist` in `src/app/actions/waitlist.ts`
+  (Zod validation, duplicate check, insert) wired to `components/waitlist-form.tsx`
+  via `useActionState`. Hero/navbar/pricing CTAs are anchor links to `#waitlist`,
+  which scrolls to that form.
+
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 

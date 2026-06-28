@@ -1,20 +1,6 @@
-"use client";
-
-import { useState } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { WaitlistForm } from "@/components/waitlist-form";
 
 export function Cta() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!email) return;
-    // Wire this up to the backend waitlist endpoint when it exists.
-    setSubmitted(true);
-  }
-
   return (
     <section id="waitlist" className="relative overflow-hidden py-24 sm:py-32">
       {/* Amber glow band */}
@@ -36,38 +22,9 @@ export function Cta() {
             teams get founder support and locked-in pricing.
           </p>
 
-          {submitted ? (
-            <div className="mx-auto mt-9 flex max-w-md items-center justify-center gap-3 rounded-xl border border-amber/30 bg-amber/10 px-5 py-4 text-sm font-medium text-foreground">
-              <CheckCircle2 className="h-5 w-5 text-amber" />
-              You&apos;re on the list — we&apos;ll be in touch soon.
-            </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="mx-auto mt-9 flex max-w-md flex-col gap-3 sm:flex-row"
-            >
-              <label htmlFor="waitlist-email" className="sr-only">
-                Work email
-              </label>
-              <input
-                id="waitlist-email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@company.com"
-                className="h-12 flex-1 rounded-lg border border-border bg-card/60 px-4 text-base text-foreground placeholder:text-muted-foreground outline-none backdrop-blur transition-colors focus:border-amber/50 focus:ring-2 focus:ring-amber/30"
-              />
-              <Button
-                type="submit"
-                size="lg"
-                className="h-12 shrink-0 bg-primary px-6 text-base font-semibold text-primary-foreground shadow-[0_12px_32px_-12px_rgba(240,165,0,0.7)] hover:bg-amber-soft"
-              >
-                Join the waitlist
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </form>
-          )}
+          <div className="mt-9">
+            <WaitlistForm source="landing_cta" />
+          </div>
 
           <p className="mt-4 text-sm text-muted-foreground">
             2,000+ teams already waiting · No credit card required
