@@ -122,3 +122,61 @@
     @apply mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10;
   }
 }
+
+/* Motion used by the hero product mockup. */
+@keyframes arc-comet {
+  0% {
+    left: -12%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    left: 108%;
+    opacity: 0;
+  }
+}
+
+@keyframes arc-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes arc-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.arc-comet {
+  animation: arc-comet 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.arc-float {
+  animation: arc-float 8s ease-in-out infinite;
+}
+
+.arc-glow-pulse {
+  animation: arc-glow-pulse 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arc-comet,
+  .arc-float,
+  .arc-glow-pulse {
+    animation: none;
+  }
+}
