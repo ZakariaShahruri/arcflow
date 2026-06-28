@@ -1,4 +1,5 @@
 import { WaitlistForm } from "@/components/waitlist-form";
+import { Reveal } from "@/components/reveal";
 
 export function Cta() {
   return (
@@ -11,7 +12,7 @@ export function Cta() {
       </div>
 
       <div className="container-arc">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
             Stop doing the busywork.
             <br />
@@ -29,7 +30,7 @@ export function Cta() {
           <p className="mt-4 text-sm text-muted-foreground">
             2,000+ teams already waiting · No credit card required
           </p>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

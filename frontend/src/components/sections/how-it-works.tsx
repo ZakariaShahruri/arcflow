@@ -13,6 +13,7 @@ import {
   Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/reveal";
 
 export function HowItWorks() {
   return (
@@ -24,7 +25,7 @@ export function HowItWorks() {
 
       <div className="container-arc">
         {/* Heading */}
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-medium uppercase tracking-[0.22em] text-amber">
             How it works
           </p>
@@ -35,10 +36,10 @@ export function HowItWorks() {
             No code, no glue scripts, no maintenance backlog. Wire it up once and
             watch it run.
           </p>
-        </div>
+        </Reveal>
 
         {/* Flow */}
-        <div className="mt-16 flex flex-col lg:flex-row lg:items-stretch lg:gap-0">
+        <Reveal delay={100} className="mt-16 flex flex-col lg:flex-row lg:items-stretch lg:gap-0">
           <Step
             index="01"
             icon={Plug}
@@ -62,7 +63,7 @@ export function HowItWorks() {
             description="Switch it on and let arcflow run the work around the clock."
             visual={<ShipVisual />}
           />
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -82,7 +83,7 @@ function Step({
   visual: React.ReactNode;
 }) {
   return (
-    <div className="group relative flex-1 rounded-2xl border border-border bg-card/40 p-6 transition-colors duration-300 hover:border-amber/30">
+    <div className="group relative flex-1 rounded-2xl border border-border bg-card/40 p-6 transition-[transform,border-color,background-color] duration-300 hover:-translate-y-1 hover:border-amber/30">
       <div className="rounded-xl border border-border/70 bg-graphite/40 p-4">
         {visual}
       </div>

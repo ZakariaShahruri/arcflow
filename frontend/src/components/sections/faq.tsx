@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Reveal } from "@/components/reveal";
 
 const FAQS = [
   {
@@ -44,7 +45,7 @@ export function Faq() {
       <div className="container-arc">
         <div className="mx-auto max-w-3xl">
           {/* Heading */}
-          <div className="text-center">
+          <Reveal className="text-center">
             <p className="text-xs font-medium uppercase tracking-[0.22em] text-amber">
               FAQ
             </p>
@@ -54,9 +55,10 @@ export function Faq() {
             <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
               Everything you need to know before you start automating.
             </p>
-          </div>
+          </Reveal>
 
           {/* Accordion */}
+          <Reveal delay={100}>
           <Accordion
             type="single"
             collapsible
@@ -78,6 +80,7 @@ export function Faq() {
               </AccordionItem>
             ))}
           </Accordion>
+          </Reveal>
         </div>
       </div>
     </section>

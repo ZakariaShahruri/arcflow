@@ -1,4 +1,5 @@
 import type { SVGProps } from "react";
+import { Reveal } from "@/components/reveal";
 
 /**
  * Social-proof bar. The "logos" are fictional companies rendered as styled
@@ -8,7 +9,7 @@ import type { SVGProps } from "react";
 export function SocialProof() {
   return (
     <section className="border-y border-border/60 bg-graphite-elevated/30">
-      <div className="container-arc py-10">
+      <Reveal className="container-arc py-10">
         <p className="text-center text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
           Trusted by teams at
         </p>
@@ -22,7 +23,7 @@ export function SocialProof() {
             />
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

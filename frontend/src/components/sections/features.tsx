@@ -7,6 +7,7 @@ import {
   Wand2,
   Zap,
 } from "lucide-react";
+import { Reveal } from "@/components/reveal";
 
 type Feature = {
   icon: LucideIcon;
@@ -52,7 +53,7 @@ export function Features() {
     <section id="product" className="relative py-24 sm:py-32">
       <div className="container-arc">
         {/* Heading */}
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-medium uppercase tracking-[0.22em] text-amber">
             Capabilities
           </p>
@@ -63,14 +64,14 @@ export function Features() {
             One platform to connect your stack, design the logic, and run it all
             without babysitting a single task.
           </p>
-        </div>
+        </Reveal>
 
         {/* Grid */}
-        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        <Reveal delay={100} className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((feature) => (
             <FeatureCard key={feature.title} {...feature} />
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

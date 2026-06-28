@@ -1,5 +1,6 @@
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/reveal";
 
 type Testimonial = {
   quote: string;
@@ -51,7 +52,7 @@ export function Testimonials() {
     <section className="relative py-24 sm:py-32">
       <div className="container-arc">
         {/* Heading */}
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-medium uppercase tracking-[0.22em] text-amber">
             Loved by builders
           </p>
@@ -62,14 +63,14 @@ export function Testimonials() {
             From scrappy startups to scaling platforms — here&apos;s what
             managers and engineers say after switching.
           </p>
-        </div>
+        </Reveal>
 
         {/* Masonry of cards */}
-        <div className="mt-16 gap-6 [column-fill:_balance] sm:columns-2 lg:columns-3">
+        <Reveal delay={100} className="mt-16 gap-6 [column-fill:_balance] sm:columns-2 lg:columns-3">
           {TESTIMONIALS.map((t) => (
             <TestimonialCard key={t.name} {...t} />
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -77,7 +78,7 @@ export function Testimonials() {
 
 function TestimonialCard({ quote, name, role, company }: Testimonial) {
   return (
-    <figure className="mb-6 break-inside-avoid rounded-2xl border border-border bg-card/40 p-6 transition-colors hover:border-amber/30">
+    <figure className="mb-6 break-inside-avoid rounded-2xl border border-border bg-card/40 p-6 transition-[transform,border-color,background-color] duration-300 hover:-translate-y-1 hover:border-amber/30">
       <div className="flex gap-0.5" aria-label="5 out of 5 stars">
         {Array.from({ length: 5 }).map((_, i) => (
           <Star key={i} className="h-4 w-4 fill-amber text-amber" />

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/reveal";
 
 type Billing = "monthly" | "annual";
 
@@ -67,7 +68,7 @@ export function Pricing() {
     <section id="pricing" className="relative py-24 sm:py-32">
       <div className="container-arc">
         {/* Heading */}
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-medium uppercase tracking-[0.22em] text-amber">
             Pricing
           </p>
@@ -77,17 +78,19 @@ export function Pricing() {
           <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
             Start free, upgrade when you outgrow it. No per-seat surprises.
           </p>
-        </div>
+        </Reveal>
 
         {/* Billing toggle */}
-        <div className="mt-10 flex items-center justify-center gap-3">
+        <Reveal delay={100} className="mt-10 flex items-center justify-center gap-3">
           <BillingToggle billing={billing} onChange={setBilling} />
-        </div>
+        </Reveal>
 
         {/* Tiers */}
         <div className="mt-14 grid items-start gap-6 lg:grid-cols-3">
-          {TIERS.map((tier) => (
-            <TierCard key={tier.name} tier={tier} billing={billing} />
+          {TIERS.map((tier, i) => (
+            <Reveal key={tier.name} delay={150 + i * 100}>
+              <TierCard tier={tier} billing={billing} />
+            </Reveal>
           ))}
         </div>
       </div>
@@ -154,10 +157,10 @@ function TierCard({ tier, billing }: { tier: Tier; billing: Billing }) {
   return (
     <div
       className={cn(
-        "relative flex flex-col rounded-2xl border p-7 transition-colors",
+        "relative flex flex-col rounded-2xl border p-7 transition-all duration-300 hover:-translate-y-1",
         recommended
           ? "border-amber/50 bg-card shadow-[0_0_0_1px_rgba(240,165,0,0.2),0_30px_80px_-30px_rgba(240,165,0,0.45)] lg:scale-[1.03]"
-          : "border-border bg-card/40",
+          : "border-border bg-card/40 hover:border-amber/30",
       )}
     >
       {recommended && (
