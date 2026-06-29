@@ -112,19 +112,19 @@ export function DashboardMockup() {
               </div>
 
               {/* Stat cards */}
-              <div className="mt-5 grid grid-cols-3 gap-3">
+              <div className="mt-5 grid grid-cols-3 gap-2 sm:gap-3">
                 <StatCard icon={Zap} label="Runs today" value="12,847" trend="+18%" up />
                 <StatCard icon={Clock} label="Time saved" value="312 hrs" trend="this week" />
                 <StatCard icon={CheckCircle2} label="Success rate" value="99.4%" trend="+0.3%" up />
               </div>
 
               {/* Workflow pipeline */}
-              <div className="mt-5 rounded-xl border border-border bg-graphite/40 p-4">
-                <div className="mb-4 flex items-center justify-between">
+              <div className="mt-5 rounded-xl border border-border bg-graphite/40 p-3 sm:p-4">
+                <div className="mb-4 flex items-center justify-between gap-2">
                   <span className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
                     Workflow
                   </span>
-                  <span className="text-[11px] text-muted-foreground">4 steps · avg 1.2s</span>
+                  <span className="shrink-0 text-[11px] text-muted-foreground">4 steps · avg 1.2s</span>
                 </div>
                 <div className="flex items-start">
                   <Node icon={UserPlus} title="Signup" sub="Trigger" />
@@ -194,12 +194,12 @@ function StatCard({
   up?: boolean;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-graphite-elevated/50 p-3">
-      <div className="flex items-center justify-between">
-        <span className="text-[11px] text-muted-foreground">{label}</span>
-        <Icon className="h-3.5 w-3.5 text-amber" />
+    <div className="rounded-xl border border-border bg-graphite-elevated/50 p-2.5 sm:p-3">
+      <div className="flex items-center justify-between gap-1">
+        <span className="truncate text-[10px] text-muted-foreground sm:text-[11px]">{label}</span>
+        <Icon className="h-3.5 w-3.5 shrink-0 text-amber" />
       </div>
-      <div className="mt-2 font-display text-lg font-semibold text-foreground sm:text-xl">
+      <div className="mt-2 font-display text-base font-semibold text-foreground sm:text-xl">
         {value}
       </div>
       <div
@@ -227,7 +227,7 @@ function Node({
   running?: boolean;
 }) {
   return (
-    <div className="flex w-14 shrink-0 flex-col items-center gap-2 sm:w-16">
+    <div className="flex w-12 shrink-0 flex-col items-center gap-2 sm:w-16">
       <div
         className={cn(
           "flex h-11 w-11 items-center justify-center rounded-xl border transition-colors",

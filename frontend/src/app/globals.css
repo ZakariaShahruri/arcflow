@@ -94,11 +94,17 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* Stop iOS from auto-inflating text in landscape. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "ss01", "cv01";
+    /* Belt-and-suspenders against horizontal scroll on small screens.
+       `clip` (not `hidden`) keeps the sticky header working. */
+    overflow-x: clip;
   }
 
   /* Display face: tight, architectural headings. */
