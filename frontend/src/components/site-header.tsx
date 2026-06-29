@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: "Product", href: "#product" },
   { label: "Workflows", href: "#workflows" },
   { label: "Pricing", href: "#pricing" },
-  { label: "Docs", href: "#docs" },
+  { label: "Docs", demo: true },
 ] as const;
 
 export function SiteHeader() {
@@ -53,15 +53,26 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) =>
+            "demo" in link ? (
+              <button
+                key={link.label}
+                type="button"
+                data-demo={link.label}
+                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </button>
+            ) : (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
@@ -70,13 +81,13 @@ export function SiteHeader() {
             asChild
             className="text-muted-foreground hover:text-foreground"
           >
-            <Link href="#login">Log in</Link>
+            <Link href="#waitlist" data-demo="Log in">Log in</Link>
           </Button>
           <Button
             asChild
             className="bg-primary font-semibold text-primary-foreground shadow-[0_0_0_1px_rgba(240,165,0,0.25),0_8px_24px_-12px_rgba(240,165,0,0.7)] hover:bg-amber-soft"
           >
-            <Link href="#start">Start free</Link>
+            <Link href="#waitlist" data-demo="Start free">Start free</Link>
           </Button>
         </div>
 
@@ -99,19 +110,31 @@ export function SiteHeader() {
         )}
       >
         <div className="container-arc flex flex-col gap-1 border-t border-border pb-6 pt-4">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="rounded-md px-3 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) =>
+            "demo" in link ? (
+              <button
+                key={link.label}
+                type="button"
+                data-demo={link.label}
+                onClick={() => setOpen(false)}
+                className="rounded-md px-3 py-3 text-left text-base font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              >
+                {link.label}
+              </button>
+            ) : (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="rounded-md px-3 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
           <div className="mt-3 flex flex-col gap-2">
             <Button variant="outline" asChild>
-              <Link href="#login" onClick={() => setOpen(false)}>
+              <Link href="#waitlist" data-demo="Log in" onClick={() => setOpen(false)}>
                 Log in
               </Link>
             </Button>
@@ -119,7 +142,7 @@ export function SiteHeader() {
               asChild
               className="bg-primary font-semibold text-primary-foreground hover:bg-amber-soft"
             >
-              <Link href="#start" onClick={() => setOpen(false)}>
+              <Link href="#waitlist" data-demo="Start free" onClick={() => setOpen(false)}>
                 Start free
               </Link>
             </Button>

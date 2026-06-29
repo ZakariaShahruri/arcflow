@@ -35,42 +35,49 @@ function YouTubeIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// Real profiles link out; the rest open the demo popup (no real accounts yet).
 const SOCIALS = [
-  { label: "X (Twitter)", href: "#twitter", Icon: XIcon },
-  { label: "GitHub", href: "#github", Icon: GitHubIcon },
-  { label: "LinkedIn", href: "#linkedin", Icon: LinkedInIcon },
-  { label: "YouTube", href: "#youtube", Icon: YouTubeIcon },
+  { label: "X (Twitter)", demo: true, Icon: XIcon },
+  { label: "GitHub", href: "https://github.com/ZakariaShahruri/arcflow", Icon: GitHubIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/zakaria-shahruri", Icon: LinkedInIcon },
+  { label: "YouTube", demo: true, Icon: YouTubeIcon },
 ] as const;
 
+// Links to real on-page sections resolve; the rest open the demo popup.
 const FOOTER_NAV = [
   {
     heading: "Product",
     links: [
       { label: "Workflows", href: "#workflows" },
-      { label: "Integrations", href: "#integrations" },
+      { label: "Integrations", demo: true },
       { label: "Pricing", href: "#pricing" },
-      { label: "Changelog", href: "#changelog" },
+      { label: "Changelog", demo: true },
     ],
   },
   {
     heading: "Company",
     links: [
-      { label: "About", href: "#about" },
-      { label: "Careers", href: "#careers" },
-      { label: "Blog", href: "#blog" },
-      { label: "Contact", href: "#contact" },
+      { label: "About", demo: true },
+      { label: "Careers", demo: true },
+      { label: "Blog", demo: true },
+      { label: "Contact", demo: true },
     ],
   },
   {
     heading: "Resources",
     links: [
-      { label: "Docs", href: "#docs" },
-      { label: "API reference", href: "#api" },
-      { label: "Community", href: "#community" },
-      { label: "Status", href: "#status" },
+      { label: "Docs", demo: true },
+      { label: "API reference", demo: true },
+      { label: "Community", demo: true },
+      { label: "Status", demo: true },
     ],
   },
 ] as const;
+
+const SOCIAL_CLASS =
+  "flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-amber/40 hover:text-amber";
+const NAV_LINK_CLASS =
+  "text-sm text-muted-foreground transition-colors hover:text-foreground";
 
 export function SiteFooter() {
   return (
@@ -78,22 +85,38 @@ export function SiteFooter() {
       <div className="container-arc py-16">
         <div className="grid gap-12 md:grid-cols-[1.5fr_repeat(3,1fr)]">
           <div className="max-w-xs">
-            <Logo />
+            <Link href="/" aria-label="arcflow home" className="inline-block">
+              <Logo />
+            </Link>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               Automation infrastructure for modern product teams. Design it
               once, let arcflow run it forever.
             </p>
             <div className="mt-6 flex items-center gap-2">
-              {SOCIALS.map(({ label, href, Icon }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-amber/40 hover:text-amber"
-                >
-                  <Icon className="h-4 w-4" />
-                </Link>
-              ))}
+              {SOCIALS.map(({ label, Icon, ...rest }) =>
+                "demo" in rest ? (
+                  <button
+                    key={label}
+                    type="button"
+                    aria-label={label}
+                    data-demo={label}
+                    className={SOCIAL_CLASS}
+                  >
+                    <Icon className="h-4 w-4" />
+                  </button>
+                ) : (
+                  <Link
+                    key={label}
+                    href={rest.href}
+                    aria-label={label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={SOCIAL_CLASS}
+                  >
+                    <Icon className="h-4 w-4" />
+                  </Link>
+                ),
+              )}
             </div>
           </div>
 
@@ -104,13 +127,20 @@ export function SiteFooter() {
               </h3>
               <ul className="mt-4 space-y-3">
                 {column.links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {link.label}
-                    </Link>
+                  <li key={link.label}>
+                    {"demo" in link ? (
+                      <button
+                        type="button"
+                        data-demo={link.label}
+                        className={NAV_LINK_CLASS}
+                      >
+                        {link.label}
+                      </button>
+                    ) : (
+                      <Link href={link.href} className={NAV_LINK_CLASS}>
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -121,13 +151,13 @@ export function SiteFooter() {
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} arcflow, Inc. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <Link href="#privacy" className="transition-colors hover:text-foreground">
+            <Link href="/privacy" className="transition-colors hover:text-foreground">
               Privacy
             </Link>
-            <Link href="#terms" className="transition-colors hover:text-foreground">
+            <Link href="/terms" className="transition-colors hover:text-foreground">
               Terms
             </Link>
-            <Link href="#security" className="transition-colors hover:text-foreground">
+            <Link href="/security" className="transition-colors hover:text-foreground">
               Security
             </Link>
           </div>

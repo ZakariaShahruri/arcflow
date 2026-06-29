@@ -54,7 +54,7 @@ export function Hero() {
             asChild
             className="h-12 border-border bg-card/40 px-7 text-base font-medium text-foreground hover:bg-secondary"
           >
-            <Link href="#demo">
+            <Link href="#waitlist" data-demo="Watch demo">
               <Play className="h-4 w-4" />
               Watch demo
             </Link>

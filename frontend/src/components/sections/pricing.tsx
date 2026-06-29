@@ -15,7 +15,7 @@ type Tier = {
   price: Record<Billing, number> | null;
   description: string;
   features: string[];
-  cta: { label: string; href: string };
+  cta: { label: string; href: string; demo?: boolean };
   recommended?: boolean;
 };
 
@@ -57,7 +57,7 @@ const TIERS: Tier[] = [
       "Dedicated support & SLA",
       "On-prem & VPC deployment",
     ],
-    cta: { label: "Contact sales", href: "#contact" },
+    cta: { label: "Contact sales", href: "#waitlist", demo: true },
   },
 ];
 
@@ -219,7 +219,12 @@ function TierCard({ tier, billing }: { tier: Tier; billing: Billing }) {
             : "border-border bg-transparent text-foreground hover:bg-secondary",
         )}
       >
-        <Link href={tier.cta.href}>{tier.cta.label}</Link>
+        <Link
+          href={tier.cta.href}
+          data-demo={tier.cta.demo ? tier.cta.label : undefined}
+        >
+          {tier.cta.label}
+        </Link>
       </Button>
 
       {/* Features */}
