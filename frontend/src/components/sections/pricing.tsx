@@ -109,14 +109,14 @@ function BillingToggle({
     <div
       role="tablist"
       aria-label="Billing period"
-      className="relative inline-flex items-center rounded-full border border-border bg-card/60 p-1 backdrop-blur"
+      className="relative grid grid-cols-2 items-center rounded-full border border-border bg-card/60 p-1 backdrop-blur"
     >
-      {/* sliding highlight */}
+      {/* sliding highlight — one column wide, slides to the active tab */}
       <span
         aria-hidden
         className={cn(
-          "absolute inset-y-1 w-[calc(50%-0.25rem)] rounded-full bg-primary transition-transform duration-300 ease-out",
-          billing === "annual" && "translate-x-[calc(100%+0.25rem)]",
+          "pointer-events-none absolute inset-y-1 left-1 w-[calc((100%-0.5rem)/2)] rounded-full bg-primary transition-transform duration-300 ease-out",
+          billing === "annual" && "translate-x-full",
         )}
       />
       {(["monthly", "annual"] as const).map((value) => (
@@ -127,7 +127,7 @@ function BillingToggle({
           aria-selected={billing === value}
           onClick={() => onChange(value)}
           className={cn(
-            "relative z-10 inline-flex items-center gap-2 rounded-full px-5 py-1.5 text-sm font-medium transition-colors",
+            "relative z-10 inline-flex items-center justify-center gap-2 rounded-full px-5 py-1.5 text-sm font-medium transition-colors",
             billing === value
               ? "text-primary-foreground"
               : "text-muted-foreground hover:text-foreground",
